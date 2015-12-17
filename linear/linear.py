@@ -1,4 +1,3 @@
-@@ -1,92 +0,0 @@
 def addition(first, second):
     isValidMatrix(first)
     isValidMatrix(second)
@@ -28,14 +27,12 @@ def subtraction(first, second):
 def multiplication(first, second):
     isValidMatrix(first)
     isValidMatrix(second)
-    
     areValidForMultiplication(first, second)
     
     result = []
-    firstRows = len(first)
+    firstRows = secondCols = len(first)
     firstCols = len(first[0])
     secondRows = len(first)
-    secondCols = len(first[0])
 
     for k in range(secondCols):
         newRow = []
@@ -63,18 +60,23 @@ def areSameSize(a, b):
     return len(a) != len(b) or len(a[0]) != len(b)
 
 def isValidMatrix(a):
+    if type(a) != type(list()):
+        raise TypeError
+
     rowLength = len(a[0])
     for row in a:
+        if type(row) != type(list()):
+            raise TypeError
         if len(row) != rowLength:
-            return False #Should throw exception.
+            raise ValueError
     return True
 
-#TODO
 def areValidForMultiplication(a, b):
-    return True
+    return len(a[0]) == len(b)
 
-#TODO: a,b compatibility validation
 def areTranspose(a, b):
+    if len(a[0]) != len(b) or len(a) != len(b[0]):
+        return False
     for row in range(len(a)):
         for col in range(len(a[0])):
             if a[row][col] != b[col][row]:
