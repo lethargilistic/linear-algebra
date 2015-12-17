@@ -56,8 +56,26 @@ def transpose(matrix):
 
     return transpose
 
-def areSameSize(a, b):
-    return len(a) != len(b) or len(a[0]) != len(b)
+def isSquare(a):
+    return len(a) > 0 and len(a) == len(a[0])
+
+def isIdentity(a):
+    if not isSquare(a):
+        return False
+    for i in range(len(a)):
+        nums = range(len(a))
+        if a[i][i] != 1:
+            return False
+        nums.remove(i)
+        for j in nums:
+            if a[i][j] != 0:
+                return False
+    return True
+
+#TODO: suport for empty matricies in other operations.
+#TODO: It should be possible for there to be a 0-row, non-0-col matrix.
+def isEmptyMatrix(a):
+    return len(a) == 0 or len(a[0]) == 0
 
 def isValidMatrix(a):
     if type(a) != type(list()):
@@ -70,6 +88,9 @@ def isValidMatrix(a):
         if len(row) != rowLength:
             raise ValueError
     return True
+
+def areSameSize(a, b):
+    return len(a) != len(b) or len(a[0]) != len(b)
 
 def areValidForMultiplication(a, b):
     return len(a[0]) == len(b)
