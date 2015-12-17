@@ -22,6 +22,21 @@ class TestModule(unittest.TestCase):
         answer = [[30, 36, 42], [66, 81, 96], [102, 126, 150]]
         result = lin.multiplication(a, b)
         self.assertEqual(result, answer)
+
+    def test_exponent_valid_square(self):
+        a = [[2, 0, 0], [0, 3, 0], [0, 0, 4]]
+        power = 3
+        answer = [[8, 0, 0], [0, 27, 0], [0, 0, 64]]
+        result = lin.exponent(a, power)
+        self.assertEqual(result, answer)
+        
+    def test_is_diagonal_true(self):
+        a = [[2, 0, 0], [0, 2, 0], [0, 0, 2]]
+        self.assertTrue(lin.is_diagonal(a))
+
+    def test_is_diagonal_false(self):
+        a = [[1, 2, 3], [4, 5, 6], [7, 8, 9]]
+        self.assertFalse(lin.is_diagonal(a))
         
     def test_is_identity_true(self):
         a = [[1, 0, 0], [0, 1, 0], [0, 0, 1]]

@@ -44,6 +44,15 @@ def multiplication(first, second):
         result.append(newRow)
     return result
 
+#Only works for diagonal square matrices
+def exponent(matrix, power):
+    if not is_diagonal(matrix) or not is_square(matrix):
+        raise ValueError
+    result = matrix[:]
+    for i in range(len(matrix)):
+        result[i][i] **= power
+    return result
+
 def transpose(matrix):
     is_valid_matrix(matrix)
 
@@ -58,6 +67,20 @@ def transpose(matrix):
 
 def is_square(a):
     return len(a) > 0 and len(a) == len(a[0])
+
+#Not sure if it's required for diagonal matrix to be square
+def is_diagonal(a):
+    if not is_square(a):
+        return False
+    for i in range(len(a)):
+        nums = list(range(len(a)))
+        if a[i][i] == 0:
+            return False
+        nums.remove(i)
+        for j in nums:
+            if a[i][j] != 0:
+                return False
+    return True    
 
 def is_identity(a):
     if not is_square(a):
