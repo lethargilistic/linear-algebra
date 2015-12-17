@@ -1,6 +1,6 @@
 def addition(first, second):
-    isValidMatrix(first)
-    isValidMatrix(second)
+    is_valid_matrix(first)
+    is_valid_matrix(second)
     
     result = []
     for row in range(len(first)):
@@ -12,8 +12,8 @@ def addition(first, second):
     return result
 
 def subtraction(first, second):
-    isValidMatrix(first)
-    isValidMatrix(second)
+    is_valid_matrix(first)
+    is_valid_matrix(second)
     
     result = []
     for row in range(len(first)):
@@ -25,9 +25,9 @@ def subtraction(first, second):
     return result
 
 def multiplication(first, second):
-    isValidMatrix(first)
-    isValidMatrix(second)
-    areValidForMultiplication(first, second)
+    is_valid_matrix(first)
+    is_valid_matrix(second)
+    are_valid_for_multiplication(first, second)
     
     result = []
     firstRows = secondCols = len(first)
@@ -45,7 +45,7 @@ def multiplication(first, second):
     return result
 
 def transpose(matrix):
-    isValidMatrix(matrix)
+    is_valid_matrix(matrix)
 
     transpose = []
     for row in range(len(matrix)):
@@ -56,14 +56,14 @@ def transpose(matrix):
 
     return transpose
 
-def isSquare(a):
+def is_square(a):
     return len(a) > 0 and len(a) == len(a[0])
 
-def isIdentity(a):
-    if not isSquare(a):
+def is_identity(a):
+    if not is_square(a):
         return False
     for i in range(len(a)):
-        nums = range(len(a))
+        nums = list(range(len(a)))
         if a[i][i] != 1:
             return False
         nums.remove(i)
@@ -74,10 +74,11 @@ def isIdentity(a):
 
 #TODO: suport for empty matricies in other operations.
 #TODO: It should be possible for there to be a 0-row, non-0-col matrix.
-def isEmptyMatrix(a):
+def is_empty_matrix(a):
     return len(a) == 0 or len(a[0]) == 0
 
-def isValidMatrix(a):
+#The name implies Boolean, but throws exceptions on failure
+def is_valid_matrix(a):
     if type(a) != type(list()):
         raise TypeError
 
@@ -89,13 +90,15 @@ def isValidMatrix(a):
             raise ValueError
     return True
 
-def areSameSize(a, b):
-    return len(a) != len(b) or len(a[0]) != len(b)
+def are_same_size(a, b):
+    is_valid_matrix(a)
+    is_valid_matrix(b)
+    return len(a) == len(b) and len(a[0]) == len(b[0])
 
-def areValidForMultiplication(a, b):
+def are_valid_for_multiplication(a, b):
     return len(a[0]) == len(b)
 
-def areTranspose(a, b):
+def are_transposed(a, b):
     if len(a[0]) != len(b) or len(a) != len(b[0]):
         return False
     for row in range(len(a)):
@@ -103,14 +106,6 @@ def areTranspose(a, b):
             if a[row][col] != b[col][row]:
                 return False
     return True
-            
-a = [[1,2,3],[4,5,6],[7,8,9]]
-b = [[1,2,3],[4,5,6],[7,8,9]]
-print(addition(a,b))
-print(subtraction(a,b))
-print(multiplication(a,b))
-t = transpose(a)
-print(t)
-print(areTranspose(a,t))
-t[0][0] = 99
-print(areTranspose(a,t))
+
+def equals(a,b):
+    raise NotImplementedError
